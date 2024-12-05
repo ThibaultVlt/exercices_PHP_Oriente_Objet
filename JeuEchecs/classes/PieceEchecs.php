@@ -25,14 +25,34 @@ class PieceEchecs
     /**
      * Constructeur du plateau d'échec
      *
-     * @param integer $coord_X
-     * @param integer $coord_y
-     * @param integer $couleur
+     * @param integer $x Coorodonée en x
+     * @param integer $y Coordonnée en y
+     * @param integer $couleur Couleur de la case et/ou de la pièce
      */
     public function __construct(int $x, int $y, int $couleur)
     {
+        //On vérifie que la valeur de x et entre 1 et 8, sinon on force la valeur au plus proche
+        if ($x < 1){
+            $x = 1;
+        }
+        if ($x > 8){
+            $x = 8;
+            }
         $this->x = $x;
+
+        //On vérifie que la valeur de y et entre 1 et 8, sinon on force la valeur au plus proche
+        if ($y < 1){
+            $y = 1;
+        }
+        if ($y > 8){
+            $y = 8;
+        }
         $this->y = $y;
+
+        //On vérifie que la couleur est 1 ou 2, sinon met une valeur par défaut à 1 (blanc)
+        if ($couleur != 1 && $couleur != 2) {
+            $couleur = 1;
+        }
         $this->couleur = $couleur;
     }
 
@@ -53,7 +73,8 @@ class PieceEchecs
      */
     public function getCouleurCase(): int
     {
-        return $this->couleur;
+        //On cherche a savoir si la case et pair ou impair
+        //On regarde si la somme / 2 = 1 ou a 2 pour savoir si case blanche (1) ou noire (2)
     }
 
 }//Laisser à la fin
