@@ -1,4 +1,5 @@
 <?php
+namespace App\Pièces;
 /**
  * Objet Pièces Echecs
  */
@@ -82,10 +83,6 @@ class PieceEchecs
             return 2; // Noir
         }
 
-        //TEST
-//         $piece = new PieceEchecs(9, 0, 3); // Coordonnées invalides et couleur invalide
-// echo "Couleur de la pièce : " . $piece->getCouleur() . "\n"; // Affiche 1 (blanc par défaut)
-// echo "Couleur de la case : " . $piece->getCouleurCase() . "\n"; 
     }
 
 }//Laisser à la fin
