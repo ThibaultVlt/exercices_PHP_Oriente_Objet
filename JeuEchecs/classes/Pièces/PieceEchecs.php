@@ -26,7 +26,7 @@ class PieceEchecs
     /**
      * Constructeur du plateau d'échec
      *
-     * @param integer $x Coorodonée en x
+     * @param integer $x Coordonnée en x
      * @param integer $y Coordonnée en y
      * @param integer $couleur Couleur de la case et/ou de la pièce
      */
@@ -82,7 +82,11 @@ class PieceEchecs
         } else {
             return 2; // Noir
         }
+    }
 
+    //Vérifier si une case est dans l'échiquier
+    public function estDansLEchiquier($x, $y) {
+        return $x >= 1 && $x <= 8 && $y >= 1 && $y <= 8;
     }
 
 }//Laisser à la fin
