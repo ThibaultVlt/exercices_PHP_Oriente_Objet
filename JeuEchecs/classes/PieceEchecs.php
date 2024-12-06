@@ -75,6 +75,17 @@ class PieceEchecs
     {
         //On cherche a savoir si la case et pair ou impair
         //On regarde si la somme / 2 = 1 ou a 2 pour savoir si case blanche (1) ou noire (2)
+        $somme = $this->x + $this->y;
+        if ($somme % 2 == 0) {
+            return 1; // Blanc
+        } else {
+            return 2; // Noir
+        }
+
+        //TEST
+//         $piece = new PieceEchecs(9, 0, 3); // Coordonnées invalides et couleur invalide
+// echo "Couleur de la pièce : " . $piece->getCouleur() . "\n"; // Affiche 1 (blanc par défaut)
+// echo "Couleur de la case : " . $piece->getCouleurCase() . "\n"; 
     }
 
 }//Laisser à la fin
