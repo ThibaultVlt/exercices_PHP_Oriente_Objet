@@ -1,5 +1,5 @@
 <?php
-namespace App\Pièces\;
+namespace App\Pièces;
 /**
  * Objet cavalier
  */
@@ -17,6 +17,7 @@ class Cavalier extends PieceEchecs
         parent::__construct($x, $y, $couleur);
     }
 
+
     /**
      * Vérification si on peut faire le déplacement
      *
@@ -26,9 +27,19 @@ class Cavalier extends PieceEchecs
      */
     public function peutAllerA($x, $y)
     {
-        if($this->estDansLEchiquier($x, $y)){
+        //Si la case n'est pas dans l'échiquier alors pas de déplacement possible vers cette position
+        if (!$this->estDansLEchiquier($x, $y)) {
+            return false;
+        }
+        //Déplacement spécifique au Cavalier en L
+        //déplacement sur X => dx soit dx=1  || dx=2
+        //déplacement en y: pour dx=1 alors dy=2
+        //pour dx=2 alors dy=1
+        $dx = abs($x - $this->getX());
+        $dy = abs($y - $this->getY());
+        if (($dx === 2 && $dy === 1) || ($dx === 1 && $dy === 2)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

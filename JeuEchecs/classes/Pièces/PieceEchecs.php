@@ -57,6 +57,68 @@ class PieceEchecs
         $this->couleur = $couleur;
     }
 
+    // GETTERS
+    /**
+     * Get des abscisses X
+     *
+     * @return int
+     */
+    public function getX() {
+        return $this->x;
+    }
+
+    /**
+     * Get des ordonnées Y
+     *
+     * @return int
+     */
+    public function getY() {
+        return $this->y;
+    }
+
+    //SETTERS
+    /**
+     * Set des abscisses X
+     *
+     * @param int $x Coordonnée X des cases
+     * @return void
+     */
+    public function setX($x) {
+        //Si la position en X est entre 1 et 8 alors OK
+        if ($x >= 1 && $x <= 8) {
+            $this->x = $x;
+        } else {
+            //Si X < 1 alors on met x = 1
+            if ($x < 1) {
+                $this->x = 1;
+            //Si X > 8 alors on met x = 8
+            } else {
+                $this->x = 8;
+            }
+        }
+    }
+
+    /**
+     * Set des ordonnées Y
+     *
+     * @param int $y Coordonnée Y des cases
+     * @return void
+     */
+    public function setY($y) {
+        //Si la position en Y est entre 1 et 8 alors OK
+        if ($y >= 1 && $y <= 8) {
+            $this->y = $y;
+        } else {
+            //Si Y < 1 alors on met Y = 1
+            if ($y < 1) {
+                $this->y = 1;
+            //Si X > 8 alors on met x = 8
+            } else {
+                $this->y = 8;
+            }
+        }
+    }
+
     /**
      * Couleur de la pièce d'échec
      *
@@ -78,9 +140,9 @@ class PieceEchecs
         //On regarde si la somme / 2 = 1 ou a 2 pour savoir si case blanche (1) ou noire (2)
         $somme = $this->x + $this->y;
         if ($somme % 2 == 0) {
-            return 1; // Blanc
-        } else {
             return 2; // Noir
+        } else {
+            return 1; // Blanc
         }
     }
 

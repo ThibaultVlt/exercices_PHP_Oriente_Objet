@@ -26,11 +26,16 @@ class Fou extends PieceEchecs
      */
     public function peutAllerA($x, $y)
     {
-        if($this->estDansLEchiquier($x, $y)){
-            return true;
-        }else{
+        //Si la case n'est pas dans l'échiquier alors pas de déplacement possible vers cette position
+        if (!$this->estDansLEchiquier($x, $y)) {
             return false;
         }
+
+        //Déplacement spécifique au Fou en diagonale
+        //déplacement sur X => dx soit dx=1
+        //déplacement en y: dy=1
+        //Donc dx = dy
+
     }
 
 
