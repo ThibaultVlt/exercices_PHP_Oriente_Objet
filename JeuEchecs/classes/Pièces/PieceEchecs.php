@@ -3,7 +3,7 @@ namespace App\Pièces;
 /**
  * Objet Pièces Echecs
  */
-class PieceEchecs
+abstract class PieceEchecs
 {
 /**
      *  Coordonnée X des cases
@@ -150,5 +150,12 @@ class PieceEchecs
     public function estDansLEchiquier($x, $y) {
         return $x >= 1 && $x <= 8 && $y >= 1 && $y <= 8;
     }
+
+    // Méthode abstraite (force l'implémentation dans les class enfants)
+    //Vérifier si le déplacement à une position
+    abstract public function peutAllerA(int $x, int $y);
+
+    //Vérifier si le pion peut manger le pion adverse
+    abstract public function peutManger(PieceEchecs $piece);
 
 }//Laisser à la fin

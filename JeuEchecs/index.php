@@ -4,6 +4,8 @@ use App\Autoload;
 use App\Pièces\PieceEchecs;
 use App\Pièces\Cavalier;
 use App\Pièces\Fou;
+use App\Pièces\Roi;
+use App\Pièces\Pion;
 
 require_once 'classes/Autoload.php';
 Autoload::register();
@@ -65,19 +67,23 @@ if ($fou->peutAllerA(2, 6)){
     print "Le cavalier ne peut pas aller en (2, 6). <br/>";
 }
 
-//Tableau de pièces
-
+// Création du tableau de pièces
 $pieces = [
-    //Pièces blanches
-    new Cavalier(3, 3, 1),
-    new Cavalier(6, 6, 1),
-    new Fou(1, 1, 1),
-    new Fou(6, 1, 1),
-    //Pièces noires
-    new Cavalier(4, 5, 2),
-    new Cavalier(7, 3, 2),
-    new Fou(5, 5, 2),
-    new Fou(7, 4, 2)
+    // Pièces blanches
+    new Cavalier(3, 3, 1), // Pièce blanche
+    new Cavalier(6, 6, 1), // Pièce blanche
+    new Fou(1, 1, 1),      // Pièce blanche
+    new Fou(6, 1, 1),      // Pièce blanche
+    new Roi(4, 4, 1),      // Pièce blanche
+    new Pion(2, 2, 1),     // Pièce blanche
+
+    // Pièces noires
+    new Cavalier(4, 5, 2), // Pièce noire
+    new Cavalier(7, 3, 2), // Pièce noire
+    new Fou(5, 5, 2),      // Pièce noire
+    new Fou(7, 4, 2),      // Pièce noire
+    new Roi(6, 6, 2),      // Pièce noire
+    new Pion(7, 7, 2)      // Pièce noire
 ];
 
 //Vérification si chacune des pièces peuvent aller en 5,5
@@ -93,3 +99,5 @@ foreach ($pieces as $index => $piece) {
         echo " ne peut pas aller à (5,5). <br/>";
     }
 }
+echo "<br/><br/>";
+

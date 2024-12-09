@@ -44,4 +44,20 @@ class Cavalier extends PieceEchecs
         }
     }
 
+    /**
+     * Vérification si on peut manger un autre pion
+     *
+     * @param PieceEchecs $piece
+     * @return void
+     */
+    public function peutManger(PieceEchecs $piece)
+    {
+        // Logique du Cavalier : Le Cavalier peut "manger" une pièce si la position
+        // est à une distance de "L" (2 cases dans une direction et 1 dans l'autre)
+        $dx = abs($this->getX() - $piece->getX());
+        $dy = abs($this->getY() - $piece->getY());
+
+        return ($dx == 2 && $dy == 1) || ($dx == 1 && $dy == 2);
+    }
+
 }//Laisser à la fin

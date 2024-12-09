@@ -1,12 +1,10 @@
 <?php
 namespace App\Pièces;
 
-use Random\Engine;
-
 /**
- * Objet fou
+ * Objet Roi
  */
-class Fou extends PieceEchecs
+class Roi extends PieceEchecs
 {
     /**
      * Constructeur du Fou
@@ -27,39 +25,31 @@ class Fou extends PieceEchecs
      * @param integer $y Coordonnée en y
      * @return boolean
      */
-    public function peutAllerA($x, $y)
-    {
-        //Si la case n'est pas dans l'échiquier alors pas de déplacement possible vers cette position
-        if (!$this->estDansLEchiquier($x, $y)) {
-            return false;
-        }
-
-        //Déplacement spécifique au Fou en diagonale
-        //déplacement sur X => dx soit dx=1
-        //déplacement en y: dy=1
-        //Donc dx = dy
+    public function peutAllerA($x, $y) {
         $dx = abs($x - $this->getX());
         $dy = abs($y - $this->getY());
-        if ($dx === $dy) {
-            return true;
-        } else {
-            return false;
-        }
+        //Déplacement d'une case seulement, en horizontal, vertical ou diagonal
+        return ($dx <= 1 && $dy <= 1);
     }
-    
+
     /**
      * Vérification si on peut manger un autre pion
      *
      * @param PieceEchecs $piece
-     * @return void
+     * @return boolean
      */
-    public function peutManger(PieceEchecs $piece)
-    {
-        // Logique du Fou : Le Fou peut "manger" une pièce si elle est sur une diagonale
+    public function peutManger(PieceEchecs $piece): bool {
+        // Vérifie si la pièce est adjacente au roi (une case de distance)
         $dx = abs($this->getX() - $piece->getX());
         $dy = abs($this->getY() - $piece->getY());
 
-        return $dx == $dy;  // Le Fou se déplace en diagonale
+        // Si la pièce est adjacente (une case dans toutes les directions)
+        if ($dx <= 1 && $dy <= 1) {
+            // Le roi peut manger la pièce s'il a une couleur différente
+            return $this->getCouleur() !== $piece->getCouleur();
+        }
+
+        return false;
     }
 
 }//Laisser à la fin
