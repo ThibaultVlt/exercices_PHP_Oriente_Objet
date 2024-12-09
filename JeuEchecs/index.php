@@ -1,7 +1,7 @@
 <?php
 
 use App\Autoload;
-use App\Pièces\PieceEchecs;
+// use App\Pièces\PieceEchecs; ne peut plus être instancié car class abstraite
 use App\Pièces\Cavalier;
 use App\Pièces\Fou;
 use App\Pièces\Roi;
@@ -13,11 +13,11 @@ Autoload::register();
 //--------------------TESTS--------------------
 
 //Vérification de la couleur de la pièce et de la couleur de la case
-$piece = new PieceEchecs(8, 1, 0);
+// $piece = new PieceEchecs(8, 1, 0);
 //Résultats : 1 => blanc ; 2 => noire
-echo "Verification de la couleur des pièces et des cases de l'échiquier (8, 1, 0) :<br/>";
-echo "Couleur de la pièce : " . $piece->getCouleur() . "<br/>";
-echo "Couleur de la case : " . $piece->getCouleurCase() . "<br/>";
+// echo "Verification de la couleur des pièces et des cases de l'échiquier (8, 1, 0) :<br/>";
+// echo "Couleur de la pièce : " . $piece->getCouleur() . "<br/>";
+// echo "Couleur de la case : " . $piece->getCouleurCase() . "<br/>";
 
 echo "<br/>";
 
@@ -101,3 +101,61 @@ foreach ($pieces as $index => $piece) {
 }
 echo "<br/><br/>";
 
+//Test de peutManger()
+$roiBlanc = new Roi(4, 4, 1);
+$roiNoir = new Roi(5, 5, 2);
+$cavalierBlanc = new Cavalier(1, 2, 1);
+$cavalierNoir = new Cavalier(2, 4, 2);
+$pionBlanc = new Pion(2, 2, 1);
+$pionNoir = new Pion(3, 3, 2);
+
+// Test des méthodes `peutManger` des pièces
+echo "Test de peutManger():<br/>";
+
+// Le roi blanc peut manger le roi
+//Résultat attendu : Oui, ils sont adjacents
+if ($roiBlanc->peutManger($roiNoir)) {
+    echo "Roi Blanc peut manger Roi Noir<br/>";
+} else {
+    echo "Roi Blanc ne peut pas manger Roi<br/>";
+}
+
+// Le cavalier blanc peut manger le cavalier
+//Résultat attendu : Non, position pas en 'L' pour un cavalier
+if ($cavalierBlanc->peutManger($cavalierNoir)) {
+    echo "Cavalier Blanc peut manger Cavalier<br/>";
+} else {
+    echo "Cavalier Blanc ne peut pas manger Cavalier<br/>";
+}
+
+// Le pion blanc peut manger le pion
+//Résultat attendu : Non, ne sont pas en position diagonale
+if ($pionBlanc->peutManger($pionNoir)) {
+    echo "Pion Blanc peut manger Pion Noir<br/>";
+} else {
+    echo "Pion Blanc ne peut pas manger Pion Noir<br/>";
+}
+
+// Le pion blanc peut manger le roi
+//Résultat attendu : Non, le pion ne mange que en diagonale de 1
+if ($pionBlanc->peutManger($roiNoir)) {
+    echo "Pion Blanc peut manger Roi<br/>";
+} else {
+    echo "Pion Blanc ne peut pas manger Roi<br/>";
+}
+
+// Le cavalier noir peut manger le pion blanc ?
+//Résultat attendu : Oui, distance en 'L'
+if ($cavalierNoir->peutManger($pionBlanc)) {
+    echo "Cavalier Noir peut manger Pion Blanc<br/>";
+} else {
+    echo "Cavalier Noir ne peut pas manger Pion Blanc<br/>";
+}
+
+// Le roi noir peut manger le cavalier blanc
+//Résultat attendu : Oui, ils sont adjacents
+if ($roiNoir->peutManger($cavalierBlanc)) {
+    echo "Roi Noir peut manger Cavalier Blanc<br/>";
+} else {
+    echo "Roi Noir ne peut pas manger Cavalier Blanc<br/>";
+}
