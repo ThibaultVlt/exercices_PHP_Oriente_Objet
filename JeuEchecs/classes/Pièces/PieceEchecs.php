@@ -57,7 +57,7 @@ class PieceEchecs
         $this->couleur = $couleur;
     }
 
-    // GETTERS
+    // GETTERS (permet de récupérer des valeurs d'une propriété)
     /**
      * Get des abscisses X
      *
@@ -76,7 +76,7 @@ class PieceEchecs
         return $this->y;
     }
 
-    //SETTERS
+    //SETTERS (permet la modification d'une valeur d'une propriété.)
     /**
      * Set des abscisses X
      *

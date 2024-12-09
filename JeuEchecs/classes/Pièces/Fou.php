@@ -1,5 +1,5 @@
 <?php
-namespace App\Pièces\;
+namespace App\Pièces;
 /**
  * Objet fou
  */
@@ -35,8 +35,13 @@ class Fou extends PieceEchecs
         //déplacement sur X => dx soit dx=1
         //déplacement en y: dy=1
         //Donc dx = dy
-
+        $dx = abs($x - $this->getX());
+        $dy = abs($y - $this->getY());
+        if ($dx === $dy) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
 
 }//Laisser à la fin
