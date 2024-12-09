@@ -65,3 +65,31 @@ if ($fou->peutAllerA(2, 6)){
     print "Le cavalier ne peut pas aller en (2, 6). <br/>";
 }
 
+//Tableau de pièces
+
+$pieces = [
+    //Pièces blanches
+    new Cavalier(3, 3, 1),
+    new Cavalier(6, 6, 1),
+    new Fou(1, 1, 1),
+    new Fou(6, 1, 1),
+    //Pièces noires
+    new Cavalier(4, 5, 2),
+    new Cavalier(7, 3, 2),
+    new Fou(5, 5, 2),
+    new Fou(7, 4, 2)
+];
+
+//Vérification si chacune des pièces peuvent aller en 5,5
+echo "Résultats : <br/>";
+foreach ($pieces as $index => $piece) {
+    $peutAller = $piece->peutAllerA(5, 5); // Vérifie si la pièce peut aller en (5,5)
+
+    echo "Pièce #" . ($index + 1) . " (" . get_class($piece) . ") ";
+    echo "à la position (" . $piece->getX() . "," . $piece->getY() . ")";
+    if ($peutAller) {
+        echo " peut aller à (5,5). <br/>";
+    } else {
+        echo " ne peut pas aller à (5,5). <br/>";
+    }
+}
