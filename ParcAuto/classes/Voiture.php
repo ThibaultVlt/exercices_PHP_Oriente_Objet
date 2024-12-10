@@ -30,18 +30,34 @@ class Voiture extends VehiculeAMoteur
      * @param float $volume Quantité de carburant (en Litres)
      * @return void
      */
-    public function rouler(float $volume)
-    {
-        //Si le moteur n'est pas démarré, on le démarre
-        if (!$this->moteur->isDemarre()) {
-            $this->demarrer();
+    public function rouler(float $volume) {
+        while ($volume > 0) {
+            //Si le réservoir est insuffisant, utiliser l'exception
+            if ($this->moteur->getVolumeReservoir() < $volume) {
+                throw new PanneEssenceException("Panne d'essence !");
+            }
+
+            //Démarrage et utilisation du carburant
+            if (!$this->moteur->isDemarre()) {
+                $this->demarrer();
+            }
+
+            $this->moteur->utiliser($volume);
+            echo "Le moteur utilise {$volume} litre(s), il reste {$this->moteur->getVolumeReservoir()} litre(s).<br/>";
+            $volume = 0;
         }
-        //Vérifier s'il reste assez de carburant dans le reservoir'
-    if ($volume > $this->moteur->getVolumeReservoir()) {
-        throw new PanneEssenceException("Panne d'essence !");
     }
-    // Sinon, utiliser le carburant
-    $carburantRestant = $this->moteur->utiliser($volume);
-    echo "Le moteur utilise {$volume} litre(s), il reste {$carburantRestant} litre(s).<br/>";
+
+    /**
+     * Faire le plein de la voiture
+     *
+     * @param float $volume Quantité de carburant (en Litres)
+     * @return void
+     */
+    public function faireLePlein(float $volume) {
+        echo "Je vais faire le plein...<br/>";
+        $this->arreter();
+        $this->moteur->faireLePlein($volume);
+        $this->demarrer();
     }
 }

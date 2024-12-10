@@ -24,24 +24,29 @@ Autoload::register();
 
 echo "Bonjour <br/>";
 
-// Instancier la voiture avec 30 litres de carburant
-$laguna = new Voiture("Renault", "Laguna", 30);
+$citroenC5 = new Voiture("Citroën", "C5", 50);
+// Affichage initial
+echo $citroenC5 . "<br/>";
 
-// Afficher les caractéristiques initiales
-echo $laguna . " <br/>";
-
-// Démarrer la voiture
-$laguna->demarrer();
-
-// Rouler avec une consommation de 29.9 litres
-$laguna->rouler(29.9);
-
-// Essayer de rouler avec 50 litres, ce qui provoque une panne d'essence
+// Essai de rouler 6 fois 10 litres
 try {
-    $laguna->rouler(50); // Ceci va lever l'exception
-} catch (PanneEssenceException $e) {
-    echo "La laguna vient de tomber en panne : " . $e->getMessage() . " <br/>";
+    // Effectuer 6 trajets de 10 litres
+    for ($i = 0; $i < 6; $i++) {
+        echo "Parcours de 10 litres :<br/>";
+        $citroenC5->rouler(10);
+    }
+} catch (Classes\PanneEssenceException $e) {
+    echo "La C5 vient de tomber en panne : " . $e->getMessage() . "<br/>";
+    
+    // Faire le plein en cas de panne
+    echo "Je vais faire le plein avec 50 litre(s)...<br/>";
+    $citroenC5->faireLePlein(50);
+    
+    // Continuer le trajet après avoir fait le plein
+    echo "Le moteur est redémarré.<br/>";
+    $citroenC5->rouler(10); // Reprendre la route après avoir redémarré
 }
 
-// Afficher les caractéristiques après la panne
-echo $laguna . "<br/>";
+// Affichage final
+echo $citroenC5 . "<br/>";
+
