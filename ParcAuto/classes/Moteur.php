@@ -36,6 +36,23 @@ class Moteur
         $this->demarre = $demarre;
     }
 
+    /**
+     * Méthode magique qui permet la conversion en chaîne de caractère
+     * @return string
+     */
+    public function __toString(): string
+    {
+        if ($this->demarre) {
+            //Si démarré
+            $demarreEtat = "";
+        } else {
+            //Sinon
+            $demarreEtat = "";
+        }
+
+        return $demarreEtat;
+    }
+
     //GETTERS
     /**
      * Get volume du réservoir
@@ -54,7 +71,7 @@ class Moteur
     }
 
     /**
-     * Etat du booléen pour savoir si moteur démarré 
+     * Etat du booléen pour savoir si moteur démarré
      * @return boolean
      */
     public function isDemarre(): bool {
@@ -66,13 +83,12 @@ class Moteur
      * retour true si le véhicule démarre
      * @return boolean
      */
-    public function demarrer(): bool {
-        echo "Tentative de démarrage...<br/>";
-
+    public function demarrer(): bool
+    {
         if ($this->volumeReservoir >= 0.1) {
             $this->volumeReservoir -= 0.1;
             $this->demarre = true;
-            echo "Le moteur démarre. Carburant restant : {$this->volumeReservoir} L<br/>";
+            echo "Consommation de 1/10 litre pour démarrer, il reste {$this->volumeReservoir} L<br/>";
             return true;
         } else {
             echo "Impossible de démarrer. Pas assez de carburant (reste {$this->volumeReservoir} L).<br/>";
@@ -87,12 +103,12 @@ class Moteur
      * @return float
      */
     public function utiliser(float $volumeNecessaire): float {
-        echo "Utilisation du moteur. Volume nécessaire pour le trajet : {$volumeNecessaire} L<br/>";
+        echo "Le moteur utilise {$volumeNecessaire} L, ";
 
         //Vérification s'il y a assez de carburant dans le réservoir
         if ($this->volumeReservoir >= $volumeNecessaire) {
             $this->volumeReservoir -= $volumeNecessaire;
-            echo "Trajet effectué. Carburant restant : {$this->volumeReservoir} L<br/>";
+            echo "il reste {$this->volumeReservoir} L.<br/>";
         } else {
             echo "Carburant insuffisant.<br/>";
             $volumeNecessaire = $this->volumeReservoir;
@@ -105,7 +121,7 @@ class Moteur
     /**
      * Ajouter un volume de carburant dans le réservoir
      *
-     * @param float $volume
+     * @param float $volume Quantité de carburant (en Litres)
      * @return void
      */
     public function faireLePlein(float $volume): void {
