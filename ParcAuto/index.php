@@ -4,6 +4,7 @@ use Classes\Autoload;
 use Classes\Moteur;
 use Classes\Voiture;
 use Classes\Scooter;
+use Classes\PanneEssenceException;
 
 require_once 'classes/Autoload.php';
 Autoload::register();
@@ -20,17 +21,27 @@ Autoload::register();
 // //Arrêter le moteur
 // $moteur->arreter();
 
-// Instanciation d'une Renault Laguna avec 30 litres dans le réservoir
-$laguna = new Classes\Voiture("Renault", "Laguna", 30);
 
-// Affichage des caractéristiques avant le trajet
-echo $laguna . "<br/>";
+echo "Bonjour <br/>";
 
-// Démarrage du moteur
+// Instancier la voiture avec 30 litres de carburant
+$laguna = new Voiture("Renault", "Laguna", 30);
+
+// Afficher les caractéristiques initiales
+echo $laguna . " <br/>";
+
+// Démarrer la voiture
 $laguna->demarrer();
 
-// Effectuer un trajet de 25 litres
-$laguna->rouler(25);
+// Rouler avec une consommation de 29.9 litres
+$laguna->rouler(29.9);
 
-// Affichage des caractéristiques après le trajet
+// Essayer de rouler avec 50 litres, ce qui provoque une panne d'essence
+try {
+    $laguna->rouler(50); // Ceci va lever l'exception
+} catch (PanneEssenceException $e) {
+    echo "La laguna vient de tomber en panne : " . $e->getMessage() . " <br/>";
+}
+
+// Afficher les caractéristiques après la panne
 echo $laguna . "<br/>";

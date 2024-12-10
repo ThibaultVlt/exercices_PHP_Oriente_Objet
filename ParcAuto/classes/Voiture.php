@@ -1,6 +1,7 @@
 <?php
 namespace Classes;
 
+
 /**
  * Objet Voiture
  */
@@ -31,11 +32,16 @@ class Voiture extends VehiculeAMoteur
      */
     public function rouler(float $volume)
     {
-        // Si le moteur n'est pas démarré, on démarre
+        //Si le moteur n'est pas démarré, on le démarre
         if (!$this->moteur->isDemarre()) {
             $this->demarrer();
         }
-        // On utilise le carburant pour le trajet
-        $carburantRestant = $this->moteur->utiliser($volume);
+        //Vérifier s'il reste assez de carburant dans le reservoir'
+    if ($volume > $this->moteur->getVolumeReservoir()) {
+        throw new PanneEssenceException("Panne d'essence !");
+    }
+    // Sinon, utiliser le carburant
+    $carburantRestant = $this->moteur->utiliser($volume);
+    echo "Le moteur utilise {$volume} litre(s), il reste {$carburantRestant} litre(s).<br/>";
     }
 }
