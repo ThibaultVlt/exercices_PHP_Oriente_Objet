@@ -1,25 +1,28 @@
 <?php
-namespace Classes\Moteur;
+namespace Classes;
 
 /**
  * Objet Moteur
  */
-class Moteur{
-    /**
-     * Nombre de litre dans le reservoir
-     * @var float
-     */
-    private float $volumeReservoir;
-    /**
-     * Nombre total de litre reçus
-     * @var float
-     */
-    private float $volumeTotal;
+class Moteur
+{
     /**
      * Moteur démarré ou non
      * @var boolean
      */
     private bool $demarre;
+
+    /**
+     * Nombre de litre dans le reservoir
+     * @var float
+     */
+    private float $volumeReservoir;
+
+    /**
+     * Nombre total de litre reçus
+     * @var float
+     */
+    private float $volumeTotal;
 
     /**
      * Constructeur de la class Moteur
@@ -58,22 +61,21 @@ class Moteur{
         return $this->demarre;
     }
 
-    TODO A Tester / Aucun test effectué
     /**
      * Consommation de 0.1 litre
      * retour true si le véhicule démarre
      * @return boolean
      */
     public function demarrer(): bool {
-        echo "Tentative de démarrage...\n";
+        echo "Tentative de démarrage...<br/>";
 
         if ($this->volumeReservoir >= 0.1) {
             $this->volumeReservoir -= 0.1;
             $this->demarre = true;
-            echo "Je démarre. Carburant restant : {$this->volumeReservoir} L\n";
+            echo "Le moteur démarre. Carburant restant : {$this->volumeReservoir} L<br/>";
             return true;
         } else {
-            echo "Impossible de démarrer. Pas assez de carburant (reste {$this->volumeReservoir} L).\n";
+            echo "Impossible de démarrer. Pas assez de carburant (reste {$this->volumeReservoir} L).<br/>";
             $this->demarre = false;
             return false;
         }
@@ -81,26 +83,24 @@ class Moteur{
 
     /**
      * Consommation du carburant pour un trajet
-     *
-     * @param float $volumeNecessaire
+     * @param float $volumeNecessaire Volume de carburant nécessaire pour un trajet.
      * @return float
      */
     public function utiliser(float $volumeNecessaire): float {
-        echo "Utilisation du moteur. Volume nécessaire : {$volumeNecessaire} L\n";
+        echo "Utilisation du moteur. Volume nécessaire pour le trajet : {$volumeNecessaire} L<br/>";
 
-        //Vérification du carburant disponible
+        //Vérification s'il y a assez de carburant dans le réservoir
         if ($this->volumeReservoir >= $volumeNecessaire) {
             $this->volumeReservoir -= $volumeNecessaire;
-            echo "Trajet effectué. Carburant restant : {$this->volumeReservoir} L\n";
+            echo "Trajet effectué. Carburant restant : {$this->volumeReservoir} L<br/>";
         } else {
-            echo "Carburant insuffisant. Utilisation de tout le réservoir ({$this->volumeReservoir} L).\n";
+            echo "Carburant insuffisant.<br/>";
             $volumeNecessaire = $this->volumeReservoir;
             $this->volumeReservoir = 0;
         }
 
         return $this->volumeReservoir;
     }
-
 
     /**
      * Ajouter un volume de carburant dans le réservoir
@@ -111,8 +111,8 @@ class Moteur{
     public function faireLePlein(float $volume): void {
         $this->volumeReservoir += $volume;
         $this->volumeTotal += $volume;
-
-        echo "Faire le plein : +{$volume} L. Carburant total reçu : {$this->volumeTotal} L. Carburant actuel : {$this->volumeReservoir} L\n";
+        echo "Plein effectué avec " . $volume . " L. <br/>";
+        echo "Il y a $this->volumeReservoir L dans le réservoir. <br/>";
     }
 
     /**
@@ -123,9 +123,9 @@ class Moteur{
     public function arreter(): void {
         if ($this->demarre) {
             $this->demarre = false;
-            echo "Moteur arrêté.\n";
+            echo "Le moteur est arrêté.<br/>";
         } else {
-            echo "Le moteur est déjà arrêté.\n";
+            echo "Le moteur est déjà arrêté.<br/>";
         }
     }
 }

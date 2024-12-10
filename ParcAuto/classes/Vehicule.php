@@ -1,9 +1,10 @@
 <?php
-namespace Classes\Vehicule;
+namespace Classes;
 /**
  * Objet Vehicule
  */
-abstract class Vehicule {
+abstract class Vehicule
+{
 
     //Méthodes abstraite
     /**
